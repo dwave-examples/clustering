@@ -21,21 +21,23 @@ class Coordinate:
 
         # coordinate labels for groups red, green, and blue
         label = "{0},{1}_".format(x, y)
-        self.g1 = label + "r"
-        self.g2 = label + "g"
-        self.g3 = label + "b"
+        self.r = label + "r"
+        self.g = label + "g"
+        self.b = label + "b"
 
 
-def main:
+def main():
     # Set up problem
-    coordinates = [(0, 0), (1, 1), (2, 4), (3, 2)]
+    scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
+    coordinates = [Coordinate(x, y) for x, y in scattered_points]
 
     # Build constraints
     csp = dwavebinarycsp.ConstraintSatisfactionProblem()
 
-    # Apply constraint: node can only be in one group
-    choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
-    csp.add_constraint()
+    # Apply constraint: coordinate can only be in one colour group
+    choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}    # TODO: remove hardcode
+    for coord in coordinates:
+        csp.add_constraint(choose_one_group, (coord.r, coord.g, coord.b))
 
     # Apply constraint: nodes in the same group share an edge
 
@@ -45,3 +47,5 @@ def main:
 
     # Visualize problem
 
+if __name__ == "__main__":
+    main()

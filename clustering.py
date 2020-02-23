@@ -13,6 +13,19 @@
 # limitations under the License.
 import dwavebinarycsp
 
+
+class Coordinate:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+        # coordinate labels for groups red, green, and blue
+        label = "{0},{1}_".format(x, y)
+        self.g1 = label + "r"
+        self.g2 = label + "g"
+        self.g3 = label + "b"
+
+
 # Set up problem
 coordinates = [(0, 0), (1, 1), (2, 4), (3, 2)]
 
@@ -20,6 +33,8 @@ coordinates = [(0, 0), (1, 1), (2, 4), (3, 2)]
 csp = dwavebinarycsp.ConstraintSatisfactionProblem()
 
 # Apply constraint: node can only be in one group
+choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
+csp.add_constraint()
 
 # Apply constraint: nodes in the same group share an edge
 

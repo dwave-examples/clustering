@@ -26,20 +26,22 @@ class Coordinate:
         self.g3 = label + "b"
 
 
-# Set up problem
-coordinates = [(0, 0), (1, 1), (2, 4), (3, 2)]
+def main:
+    # Set up problem
+    coordinates = [(0, 0), (1, 1), (2, 4), (3, 2)]
 
-# Build constraints
-csp = dwavebinarycsp.ConstraintSatisfactionProblem()
+    # Build constraints
+    csp = dwavebinarycsp.ConstraintSatisfactionProblem()
 
-# Apply constraint: node can only be in one group
-choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
-csp.add_constraint()
+    # Apply constraint: node can only be in one group
+    choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
+    csp.add_constraint()
 
-# Apply constraint: nodes in the same group share an edge
+    # Apply constraint: nodes in the same group share an edge
 
-# Bias for short edges
+    # Bias for short edges
 
-# Submit problem to solver
+    # Submit problem to solver
 
-# Visualize problem
+    # Visualize problem
+

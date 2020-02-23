@@ -11,4 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import dwavebinarycsp
 
+# Set up problem
+coordinates = [(0, 0), (1, 1), (2, 4), (3, 2)]
+
+# Build constraints
+csp = dwavebinarycsp.ConstraintSatisfactionProblem()
+
+# Apply constraint: node can only be in one group
+
+# Apply constraint: nodes in the same group share an edge
+
+# Bias for short edges
+
+# Submit problem to solver
+
+# Visualize problem

@@ -14,6 +14,7 @@
 import math
 
 import dwavebinarycsp
+import dwave.inspector
 from dwave.system import EmbeddingComposite, DWaveSampler
 
 
@@ -92,9 +93,12 @@ def main():
 
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
-    print(solver.sample(bqm).lowest)
+    sampleset = solver.sample(bqm)
+    best_sample = sampleset.first.sample
 
     # Visualize problem
+    dwave.inspector.show(bqm, sampleset)
+
 
 
 if __name__ == "__main__":

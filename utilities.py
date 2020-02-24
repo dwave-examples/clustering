@@ -20,7 +20,7 @@ def get_groupings(sample):
         # Parse selected items
         # Note: label look like "<x_coord>,<y_coord>_<color>"
         coord, color = label.split("_")
-        coord_tuple = tuple(map(int, coord.split(",")))
+        coord_tuple = tuple(map(float, coord.split(",")))
         colored_points[color].append(coord_tuple)
 
     return dict(colored_points)

@@ -53,9 +53,8 @@ def get_max_distance(coordinates):
     return max_distance
 
 
-def main():
+def cluster_points(scattered_points):
     # Set up problem
-    scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
     coordinates = [Coordinate(x, y) for x, y in scattered_points]
     max_distance = get_max_distance(coordinates)
 
@@ -109,4 +108,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
+    cluster_points(scattered_points)

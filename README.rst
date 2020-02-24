@@ -3,9 +3,7 @@ Clustering
 ==========
 Clusters data points.
 
-If your demo produces a visualization, consider displaying an image of it here.
-
-.. image:: dwave_logo.png
+.. image:: readme_imgs/clustered_plot.png
 
 
 Usage

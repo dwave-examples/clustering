@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import math
+
 import dwavebinarycsp
 from dwave.system import EmbeddingComposite, DWaveSampler
 
@@ -52,17 +54,30 @@ def main():
         csp.add_constraint(choose_one_group, (coord.r, coord.g, coord.b))
 
     # Apply constraint: all colours must be used at least once
-    csp.add_constraint(is_positive_sum, [coord.r for coord in coordinates])
-    csp.add_constraint(is_positive_sum, [coord.g for coord in coordinates])
-    csp.add_constraint(is_positive_sum, [coord.b for coord in coordinates])
+    # csp.add_constraint(is_positive_sum, [coord.r for coord in coordinates])
+    # csp.add_constraint(is_positive_sum, [coord.g for coord in coordinates])
+    # csp.add_constraint(is_positive_sum, [coord.b for coord in coordinates])
 
     # Build initial BQM
     bqm = dwavebinarycsp.stitch(csp)
 
     # Edit BQM to bias for short edges
-    # for i, coord0 in enumerate(coordinates[:-1]):
-    #     for coord1 in coordinates[i+1:]:
-    #         bqm.add_interaction()
+    for i, coord0 in enumerate(coordinates[:-1]):
+        for coord1 in coordinates[i+1:]:
+            distance = get_squared_distance(coord0, coord1)
+            bqm.add_interaction(coord0.r, coord1.r, -1/distance)
+            bqm.add_interaction(coord0.g, coord1.g, -1/distance)
+            bqm.add_interaction(coord0.b, coord1.b, -1/distance)
+
+    for i, coord0 in enumerate(coordinates[:-1]):
+        for coord1 in coordinates[i+1:]:
+            distance = get_squared_distance(coord0, coord1)
+            bqm.add_interaction(coord0.r, coord1.b, math.exp(distance))
+            bqm.add_interaction(coord0.r, coord1.g, math.exp(distance))
+            bqm.add_interaction(coord0.b, coord1.r, math.exp(distance))
+            bqm.add_interaction(coord0.b, coord1.g, math.exp(distance))
+            bqm.add_interaction(coord0.g, coord1.r, math.exp(distance))
+            bqm.add_interaction(coord0.g, coord1.b, math.exp(distance))
 
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))

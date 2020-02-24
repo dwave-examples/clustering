@@ -17,9 +17,7 @@ import dwavebinarycsp
 import dwave.inspector
 from dwave.system import EmbeddingComposite, DWaveSampler
 
-import matplotlib
-matplotlib.use("agg")
-import matplotlib.pyplot as plt
+from utilities import get_groupings, visualize_groupings
 
 
 class Coordinate:
@@ -101,23 +99,8 @@ def main():
 
     # Visualize solution
     best_sample = sampleset.first.sample
-
-    colored_points = {"r": [], "g": [], "b": []}
-    for label, bool_val in best_sample.items():
-        if not bool_val:
-            continue
-        coord, color = label.split("_")
-        coord_tuple = tuple(map(int, coord.split(",")))
-        colored_points[color].append(coord_tuple)
-
-    print(colored_points)
-    for color, points in colored_points.items():
-        if not points:
-            continue
-        point_style = color + "o"
-        plt.plot(*zip(*points), point_style)
-
-    plt.savefig("hello.png")
+    groupings = get_groupings(best_sample)
+    visualize_groupings(groupings, "plot.png")
 
 
 if __name__ == "__main__":

@@ -89,7 +89,7 @@ def cluster_points(scattered_points):
             # Note: rescaled and applied square root so that far off distances
             #   are all weighted approximately the same
             d = math.sqrt(get_distance(coord0, coord1) / max_distance)
-            weight = -math.tanh(d)
+            weight = -math.tanh(d) * 0.1
 
             # Apply weights to BQM
             bqm.add_interaction(coord0.r, coord1.b, weight)
@@ -101,7 +101,7 @@ def cluster_points(scattered_points):
 
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
-    sampleset = solver.sample(bqm, chain_strength=1)
+    sampleset = solver.sample(bqm, chain_strength=1, num_reads=1000)
     best_sample = sampleset.first.sample
 
     # Visualize graph problem

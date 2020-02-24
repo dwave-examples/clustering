@@ -75,26 +75,27 @@ def main():
     # Edit BQM to bias for short edges
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
-            distance = get_distance(coord0, coord1) / max_distance
-            bqm.add_interaction(coord0.r, coord1.r, -1/distance)
-            bqm.add_interaction(coord0.g, coord1.g, -1/distance)
-            bqm.add_interaction(coord0.b, coord1.b, -1/distance)
+            d = get_distance(coord0, coord1) / max_distance
+            bqm.add_interaction(coord0.r, coord1.r, -math.cos(d * math.pi))
+            bqm.add_interaction(coord0.g, coord1.g, -math.cos(d * math.pi))
+            bqm.add_interaction(coord0.b, coord1.b, -math.cos(d * math.pi))
 
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
-            distance = get_distance(coord0, coord1) / max_distance
-            bqm.add_interaction(coord0.r, coord1.b, math.exp(distance))
-            bqm.add_interaction(coord0.r, coord1.g, math.exp(distance))
-            bqm.add_interaction(coord0.b, coord1.r, math.exp(distance))
-            bqm.add_interaction(coord0.b, coord1.g, math.exp(distance))
-            bqm.add_interaction(coord0.g, coord1.r, math.exp(distance))
-            bqm.add_interaction(coord0.g, coord1.b, math.exp(distance))
+            d = get_distance(coord0, coord1) / max_distance
+            bqm.add_interaction(coord0.r, coord1.b, -d / (1+d))
+            bqm.add_interaction(coord0.r, coord1.g, -d / (1+d))
+            bqm.add_interaction(coord0.b, coord1.r, -d / (1+d))
+            bqm.add_interaction(coord0.b, coord1.g, -d / (1+d))
+            bqm.add_interaction(coord0.g, coord1.r, -d / (1+d))
+            bqm.add_interaction(coord0.g, coord1.b, -d / (1+d))
 
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
-    print(solver.sample(bqm))
+    print(solver.sample(bqm).lowest)
 
     # Visualize problem
+
 
 if __name__ == "__main__":
     main()

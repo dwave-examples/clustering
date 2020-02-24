@@ -119,7 +119,7 @@ def cluster_points(scattered_points):
 if __name__ == "__main__":
     # scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
 
-    covariance = [[2, 0], [0, 2]]
+    covariance = [[3, 0], [0, 3]]
     n_points = 3
     x0, y0 = np.random.multivariate_normal([0, 0], covariance, n_points).T
     x1, y1 = np.random.multivariate_normal([10, 5], covariance, n_points).T
@@ -128,5 +128,11 @@ if __name__ == "__main__":
     ys = np.hstack([y0, y1, y2])
     xys = np.vstack([xs, ys]).T
     scattered_points = list(map(tuple, xys))
+
+    import matplotlib
+    matplotlib.use("agg")
+    import matplotlib.pyplot as plt
+    plt.plot(*zip(*scattered_points), "o")
+    plt.savefig("orig_plot.png")
 
     cluster_points(scattered_points)

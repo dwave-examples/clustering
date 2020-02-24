@@ -65,11 +65,6 @@ def main():
     for coord in coordinates:
         csp.add_constraint(choose_one_group, (coord.r, coord.g, coord.b))
 
-    # Apply constraint: all colours must be used at least once
-    # csp.add_constraint(is_positive_sum, [coord.r for coord in coordinates])
-    # csp.add_constraint(is_positive_sum, [coord.g for coord in coordinates])
-    # csp.add_constraint(is_positive_sum, [coord.b for coord in coordinates])
-
     # Build initial BQM
     bqm = dwavebinarycsp.stitch(csp)
 
@@ -77,28 +72,31 @@ def main():
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
             d = get_distance(coord0, coord1) / max_distance
-            bqm.add_interaction(coord0.r, coord1.r, -math.cos(d * math.pi))
-            bqm.add_interaction(coord0.g, coord1.g, -math.cos(d * math.pi))
-            bqm.add_interaction(coord0.b, coord1.b, -math.cos(d * math.pi))
+            weight = -math.cos(d*math.pi)
+            bqm.add_interaction(coord0.r, coord1.r, weight)
+            bqm.add_interaction(coord0.g, coord1.g, weight)
+            bqm.add_interaction(coord0.b, coord1.b, weight)
 
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
             d = get_distance(coord0, coord1) / max_distance
-            bqm.add_interaction(coord0.r, coord1.b, -d / (1+d))
-            bqm.add_interaction(coord0.r, coord1.g, -d / (1+d))
-            bqm.add_interaction(coord0.b, coord1.r, -d / (1+d))
-            bqm.add_interaction(coord0.b, coord1.g, -d / (1+d))
-            bqm.add_interaction(coord0.g, coord1.r, -d / (1+d))
-            bqm.add_interaction(coord0.g, coord1.b, -d / (1+d))
+            weight = -d / (1+d)
+            bqm.add_interaction(coord0.r, coord1.b, weight)
+            bqm.add_interaction(coord0.r, coord1.g, weight)
+            bqm.add_interaction(coord0.b, coord1.r, weight)
+            bqm.add_interaction(coord0.b, coord1.g, weight)
+            bqm.add_interaction(coord0.g, coord1.r, weight)
+            bqm.add_interaction(coord0.g, coord1.b, weight)
 
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
     sampleset = solver.sample(bqm)
-    best_sample = sampleset.first.sample
 
-    # Visualize problem
+    # Visualize graph problem
     dwave.inspector.show(bqm, sampleset)
 
+    # Visualize solution
+    best_sample = sampleset.first.sample
 
 
 if __name__ == "__main__":

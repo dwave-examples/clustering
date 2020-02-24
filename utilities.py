@@ -23,7 +23,7 @@ def get_groupings(sample):
         coord_tuple = tuple(map(int, coord.split(",")))
         colored_points[color].append(coord_tuple)
 
-    return colored_points
+    return dict(colored_points)
 
 
 def visualize_groupings(groupings_dict, filename):

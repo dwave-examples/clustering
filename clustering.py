@@ -73,8 +73,11 @@ def cluster_points(scattered_points):
     # Edit BQM to bias for close together points to share the same color
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
-            d = get_distance(coord0, coord1) / max_distance
+            # Set up weight
+            d = get_distance(coord0, coord1) / max_distance  # rescale distance
             weight = -math.cos(d*math.pi)
+
+            # Apply weights to BQM
             bqm.add_interaction(coord0.r, coord1.r, weight)
             bqm.add_interaction(coord0.g, coord1.g, weight)
             bqm.add_interaction(coord0.b, coord1.b, weight)
@@ -82,9 +85,13 @@ def cluster_points(scattered_points):
     # Edit BQM to bias for far away points to have different colors
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
+            # Set up weight
+            # Note: rescaled and applied square root so that far off distances
+            #   are all weighted approximately the same
             d = math.sqrt(get_distance(coord0, coord1) / max_distance)
-            #weight = -d / (1+d)
             weight = -math.tanh(d)
+
+            # Apply weights to BQM
             bqm.add_interaction(coord0.r, coord1.b, weight)
             bqm.add_interaction(coord0.r, coord1.g, weight)
             bqm.add_interaction(coord0.b, coord1.r, weight)

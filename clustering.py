@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import dwavebinarycsp
+from dwave.system import EmbeddingComposite, DWaveSampler
 
 
 class Coordinate:
@@ -26,24 +27,46 @@ class Coordinate:
         self.b = label + "b"
 
 
+def is_positive_sum(*args):
+    return sum(args) > 0
+
+
+def get_squared_distance(coordinate_0, coordinate_1):
+    diff_x = coordinate_0.x - coordinate_1.x
+    diff_y = coordinate_0.y - coordinate_1.y
+
+    return diff_x**2 + diff_y**2
+
+
 def main():
     # Set up problem
     scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
     coordinates = [Coordinate(x, y) for x, y in scattered_points]
 
     # Build constraints
-    csp = dwavebinarycsp.ConstraintSatisfactionProblem()
+    csp = dwavebinarycsp.ConstraintSatisfactionProblem(dwavebinarycsp.BINARY)
 
     # Apply constraint: coordinate can only be in one colour group
     choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}    # TODO: remove hardcode
     for coord in coordinates:
         csp.add_constraint(choose_one_group, (coord.r, coord.g, coord.b))
 
-    # Apply constraint: nodes in the same group share an edge
+    # Apply constraint: all colours must be used at least once
+    csp.add_constraint(is_positive_sum, [coord.r for coord in coordinates])
+    csp.add_constraint(is_positive_sum, [coord.g for coord in coordinates])
+    csp.add_constraint(is_positive_sum, [coord.b for coord in coordinates])
 
-    # Bias for short edges
+    # Build initial BQM
+    bqm = dwavebinarycsp.stitch(csp)
+
+    # Edit BQM to bias for short edges
+    # for i, coord0 in enumerate(coordinates[:-1]):
+    #     for coord1 in coordinates[i+1:]:
+    #         bqm.add_interaction()
 
     # Submit problem to solver
+    solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
+    print(solver.sample(bqm))
 
     # Visualize problem
 

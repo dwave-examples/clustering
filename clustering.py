@@ -33,17 +33,28 @@ def is_positive_sum(*args):
     return sum(args) > 0
 
 
-def get_squared_distance(coordinate_0, coordinate_1):
+def get_distance(coordinate_0, coordinate_1):
     diff_x = coordinate_0.x - coordinate_1.x
     diff_y = coordinate_0.y - coordinate_1.y
 
-    return diff_x**2 + diff_y**2
+    return math.sqrt(diff_x**2 + diff_y**2)
+
+
+def get_max_distance(coordinates):
+    max_distance = 0
+    for i, coord0 in enumerate(coordinates[:-1]):
+        for coord1 in coordinates[i+1:]:
+            distance = get_distance(coord0, coord1)
+            max_distance = max(max_distance, distance)
+
+    return max_distance
 
 
 def main():
     # Set up problem
     scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
     coordinates = [Coordinate(x, y) for x, y in scattered_points]
+    max_distance = get_max_distance(coordinates)
 
     # Build constraints
     csp = dwavebinarycsp.ConstraintSatisfactionProblem(dwavebinarycsp.BINARY)
@@ -64,14 +75,14 @@ def main():
     # Edit BQM to bias for short edges
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
-            distance = get_squared_distance(coord0, coord1)
+            distance = get_distance(coord0, coord1) / max_distance
             bqm.add_interaction(coord0.r, coord1.r, -1/distance)
             bqm.add_interaction(coord0.g, coord1.g, -1/distance)
             bqm.add_interaction(coord0.b, coord1.b, -1/distance)
 
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
-            distance = get_squared_distance(coord0, coord1)
+            distance = get_distance(coord0, coord1) / max_distance
             bqm.add_interaction(coord0.r, coord1.b, math.exp(distance))
             bqm.add_interaction(coord0.r, coord1.g, math.exp(distance))
             bqm.add_interaction(coord0.b, coord1.r, math.exp(distance))

@@ -93,14 +93,18 @@ def main():
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
     sampleset = solver.sample(bqm)
+    best_sample = sampleset.first.sample
 
     # Visualize graph problem
     dwave.inspector.show(bqm, sampleset)
 
     # Visualize solution
-    best_sample = sampleset.first.sample
     groupings = get_groupings(best_sample)
     visualize_groupings(groupings, "plot.png")
+
+    # Print solution onto terminal
+    # Note: This is simply a more compact version of 'best_sample'
+    print(groupings)
 
 
 if __name__ == "__main__":

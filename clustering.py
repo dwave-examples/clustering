@@ -70,7 +70,7 @@ def main():
     # Build initial BQM
     bqm = dwavebinarycsp.stitch(csp)
 
-    # Edit BQM to bias for short edges
+    # Edit BQM to bias for close together points to share the same color
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
             d = get_distance(coord0, coord1) / max_distance
@@ -79,6 +79,7 @@ def main():
             bqm.add_interaction(coord0.g, coord1.g, weight)
             bqm.add_interaction(coord0.b, coord1.b, weight)
 
+    # Edit BQM to bias for far away points to have different colors
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
             d = get_distance(coord0, coord1) / max_distance

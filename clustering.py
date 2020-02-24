@@ -16,6 +16,7 @@ import math
 import dwavebinarycsp
 import dwave.inspector
 from dwave.system import EmbeddingComposite, DWaveSampler
+import numpy as np
 
 from utilities import get_groupings, visualize_groupings
 
@@ -81,8 +82,9 @@ def cluster_points(scattered_points):
     # Edit BQM to bias for far away points to have different colors
     for i, coord0 in enumerate(coordinates[:-1]):
         for coord1 in coordinates[i+1:]:
-            d = get_distance(coord0, coord1) / max_distance
-            weight = -d / (1+d)
+            d = math.sqrt(get_distance(coord0, coord1) / max_distance)
+            #weight = -d / (1+d)
+            weight = -math.tanh(d)
             bqm.add_interaction(coord0.r, coord1.b, weight)
             bqm.add_interaction(coord0.r, coord1.g, weight)
             bqm.add_interaction(coord0.b, coord1.r, weight)
@@ -92,7 +94,7 @@ def cluster_points(scattered_points):
 
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
-    sampleset = solver.sample(bqm)
+    sampleset = solver.sample(bqm, chain_strength=1)
     best_sample = sampleset.first.sample
 
     # Visualize graph problem
@@ -108,5 +110,16 @@ def cluster_points(scattered_points):
 
 
 if __name__ == "__main__":
-    scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
+    # scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
+
+    covariance = [[2, 0], [0, 2]]
+    n_points = 3
+    x0, y0 = np.random.multivariate_normal([0, 0], covariance, n_points).T
+    x1, y1 = np.random.multivariate_normal([10, 5], covariance, n_points).T
+    x2, y2 = np.random.multivariate_normal([5, 15], covariance, n_points).T
+    xs = np.hstack([x0, x1, x2])
+    ys = np.hstack([y0, y1, y2])
+    xys = np.vstack([xs, ys]).T
+    scattered_points = list(map(tuple, xys))
+
     cluster_points(scattered_points)

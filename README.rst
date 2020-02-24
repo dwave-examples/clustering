@@ -1,8 +1,7 @@
 ==========
 Clustering
 ==========
-
-Short blurb on what this demo does.
+Clusters data points.
 
 If your demo produces a visualization, consider displaying an image of it here.
 
@@ -12,12 +11,12 @@ If your demo produces a visualization, consider displaying an image of it here.
 Usage
 -----
 
-A simple command that runs the demo. For example,
-
 .. code-block:: bash
 
-  python <demo_name>.py
+  python clustering.py
 
+This provide a visualization of the problem on the D-Wave Inspector and save
+the solution in a plot, ``plot.png``.
 
 Code Overview
 -------------

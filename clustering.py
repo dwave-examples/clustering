@@ -94,9 +94,9 @@ def cluster_points(scattered_points, filename):
             bqm.add_interaction(coord0.g, coord1.r, weight)
             bqm.add_interaction(coord0.g, coord1.b, weight)
 
-    # Submit problem to solver
-    solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
-    sampleset = solver.sample(bqm, chain_strength=1.5, num_reads=1000)
+    # Submit problem to D-Wave sampler
+    sampler = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
+    sampleset = sampler.sample(bqm, chain_strength=1.5, num_reads=1000)
     best_sample = sampleset.first.sample
 
     # Visualize graph problem

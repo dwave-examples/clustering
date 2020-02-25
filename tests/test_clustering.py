@@ -1,4 +1,4 @@
-# Copyright [yyyy] [name of copyright owner]
+# Copyright 2020 D-Wave Systems Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +12,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Things to do:
- - Please name this file `test_<demo_name>.py`
- - Fill in [yyyy] and [name of copyright owner] in the copyright (top line)
- - Add unit tests for your demo
- - Add a smoke test (i.e. does the demo actually run?)
- - Format code so that it conforms with PEP 8
-"""

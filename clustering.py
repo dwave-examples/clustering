@@ -96,7 +96,7 @@ def cluster_points(scattered_points, filename):
 
     # Submit problem to solver
     solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
-    sampleset = solver.sample(bqm, chain_strength=1, num_reads=1000)
+    sampleset = solver.sample(bqm, chain_strength=1.5, num_reads=1000)
     best_sample = sampleset.first.sample
 
     # Visualize graph problem

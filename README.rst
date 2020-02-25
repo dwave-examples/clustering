@@ -61,10 +61,10 @@ Each data point can only join one cluster
 * The code is only considering three different cluster labels: red, green, and
   blue.
 * Since a qubit can only end up in one of two states (i.e. it can only
-  answer yes or no questions)
-
-TODO: PUT INSPECTOR IMAGE WITH HERE
-
+  answer yes or no questions), each data point has three nodes associated to it:
+  ``<coordinate>.r``, ``<coordinate>.g``, and ``<coordinate>.b``. That way, we
+  can answer yes-no questions for whether a specific coordinate is in a
+  particular colour cluster.
 * The rule that a data point may only join one cluster is represented by the
   variable ``choose_one_group`` (shown below). Each three-item-tuple below can
   be interpreted as ``(<join-red>, <join-green>, <join-blue>)``, where the
@@ -76,6 +76,11 @@ TODO: PUT INSPECTOR IMAGE WITH HERE
   ::
 
       choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
+
+* You can easily see this "choose one group" constraint in the D-Wave inspector.
+
+.. image:: readme_imgs/clustered_plot.png
+
 
 Close together data points should be in the same cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

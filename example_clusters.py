@@ -1,3 +1,9 @@
+# This is not the main demo script. It is simple a handy script generate more
+# interesting data to try with the main demo script, `clustering.py`.
+#
+# This script is about setting up this more interesting data and then passing
+# the data to `clustering.cluster_points(..)`, a key function in this demo.
+
 import numpy as np
 
 from utilities import visualize_scatterplot

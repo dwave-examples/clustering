@@ -112,7 +112,7 @@ def cluster_points(scattered_points, filename):
 
 
 if __name__ == "__main__":
-    # Simple hardcoded data points
+    # Simple, hardcoded data set
     scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
 
     # Save the original, un-clustered plot

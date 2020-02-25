@@ -17,12 +17,21 @@ the whole cluster with a single labelled member. i.e. we can infer information b
 Usage
 -----
 
+To run the demo with a simple, hardcoded dataset:
+
 .. code-block:: bash
 
   python clustering.py
 
 This provide a visualization of the problem on the D-Wave Inspector and save
 the solution in a plot, ``plot.png``.
+
+To run the same demo with a slightly more sophisticated dataset:
+
+.. code-block:: bash
+
+  python example_clusters.py
+
 
 Code Overview
 -------------

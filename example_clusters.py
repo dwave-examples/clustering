@@ -2,7 +2,7 @@
 # interesting data to try with the main demo script, `clustering.py`.
 #
 # This script is about setting up this more interesting data and then passing
-# the data to `clustering.cluster_points(..)`, a key function in this demo.
+# the data to `clustering.cluster_points(..)`, a key function `clustering.py`.
 
 import numpy as np
 

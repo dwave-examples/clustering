@@ -36,16 +36,29 @@ Key properties of the clustering problem that we need to capture in our BQM:
 Code Specifics
 --------------
 
-Notable parts of the code implementation.
+Let's go through how we implement each of the key properties of our clustering
+problem.
 
-This is the place to:
+Each data point can only join one cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Highlight a part of the code implementation
-* Talk about unusual or potentially difficult parts of the code
-* Explain a code decision
+* The code is only considering three different cluster labels: red, green, and
+  blue. Therefore, if a data point is in the red cluster, it is not allowed
+  to join the green nor blue clusters.
+* This cluster membership rule is represented by the variable
+  `choose_one_group`.
 
-Note: there is no need to repeat everything that is already well-documented in
-the code.
+  ::
+      choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
+
+  
+
+
+Close together data points should be in the same cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Far apart data points should be in different clusters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 References

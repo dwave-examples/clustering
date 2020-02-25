@@ -96,7 +96,7 @@ def cluster_points(scattered_points, filename):
 
     # Submit problem to D-Wave sampler
     sampler = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
-    sampleset = sampler.sample(bqm, chain_strength=1.5, num_reads=1000)
+    sampleset = sampler.sample(bqm, chain_strength=4, num_reads=1000)
     best_sample = sampleset.first.sample
 
     # Visualize graph problem

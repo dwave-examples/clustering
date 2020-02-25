@@ -23,14 +23,14 @@ To run the demo with a simple, hardcoded dataset:
 
   python clustering.py
 
-This provide a visualization of the problem on the D-Wave Inspector and save
-the solution in a plot, ``plot.png``.
-
 To run the same demo with a slightly more sophisticated dataset:
 
 .. code-block:: bash
 
   python example_clusters.py
+
+This provide a visualization of the problem on the D-Wave Inspector and save
+the solution in a plot, ``plot.png``.
 
 
 Code Overview
@@ -87,9 +87,9 @@ Each data point can only join one cluster
 
 .. image:: readme_imgs/logical_graph.png
 
-* In the actual D-Wave Inspector, you can actually hover over these nodes and
-  find out which data point and colour they represent and the BQM weights that
-  are placed on them.
+* In the actual D-Wave Inspector, you can hover over these nodes and find out
+  which data point and colour they represent and the BQM weights that are placed
+  on them.
 
 
 Close together data points should be in the same cluster

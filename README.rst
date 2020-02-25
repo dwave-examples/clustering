@@ -1,6 +1,7 @@
 ==========
 Clustering
 ==========
+
 Clusters data points.
 
 .. image:: readme_imgs/clustered_plot.png
@@ -19,11 +20,17 @@ the solution in a plot, ``plot.png``.
 Code Overview
 -------------
 
-A general overview of how the code works.
+The D-Wave quantum computer solves a particular type of mathematical model
+called the Binary Quadratic Model. The goal here is to build a BQM such that
+it represents of our clustering problem. Namely, we want a BQM such that a
+low-energy solution found by the D-Wave quantum computer would correspond to a
+solution to our clustering problem.
 
-Prefer bite-sized descriptions in bullet points:
+Key properties of the clustering problem that we need to capture in our BQM:
 
-* Here's an example bullet point
+* Each data point can only be a part of one cluster
+* Data points that are close together should be a part of the same cluster
+* Data points that are far apart should be in different clusters
 
 
 Code Specifics

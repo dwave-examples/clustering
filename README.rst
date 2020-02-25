@@ -2,21 +2,21 @@
 Clustering
 ==========
 
-A demo on identifying clusters in a dataset using the D-Wave quantum computer.
+A demo on identifying clusters in a data set using the D-Wave quantum computer.
 
-When dealing with large datasets, we do not always have neatly labeled data
+When dealing with large data sets, we do not always have neatly labeled data
 (i.e. most, if not all, the data could be unlabeled). However, all is not lost
 as we can still extract insights from this data through clustering.
 
-For example, when dealing with housing data - namely, square footage and price -
+For example, when dealing with housing data---namely, square footage and price---
 we can identify clusters in that data which may be indicative of different
-neighbourhoods. Another example could be having a boolean vector of tv shows
+neighbourhoods. Another example could be having a boolean vector of TV shows
 that consumers watch; clusters in this data could help identify a particular
 consumer demographic.
 
-As well, if we do have a couple labelled data points in our data set, we could
-potentially label the entire cluster (containing said labelled data point) with
-that same label.
+As well, if we do have a couple of labelled data points in our data set, we
+could potentially label the entire cluster based on the few labelled data points
+it contains.
 
 .. image:: readme_imgs/clustered_plot.png
 
@@ -24,19 +24,19 @@ that same label.
 Usage
 -----
 
-To run the demo with a simple, hardcoded dataset:
+To run the demo with a simple, hardcoded data set:
 
 .. code-block:: bash
 
   python clustering.py
 
-To run the same demo with a slightly more sophisticated dataset:
+To run the same demo with a slightly more sophisticated data set:
 
 .. code-block:: bash
 
   python example_clusters.py
 
-This provide a visualization of the problem on the D-Wave Inspector and save
+This provides a visualization of the problem on the D-Wave Problem Inspector and saves
 the solution in a plot, ``plot.png``.
 
 
@@ -45,7 +45,7 @@ Code Overview
 
 The D-Wave quantum computer solves a particular type of mathematical model
 called the Binary Quadratic Model. The goal here is to build a BQM such that
-it represents of our clustering problem. Namely, we want a BQM such that a
+it represents our clustering problem. Namely, we want a BQM such that a
 low-energy solution found by the D-Wave quantum computer would correspond to a
 solution to our clustering problem.
 
@@ -108,7 +108,7 @@ Close together data points should be in the same cluster
   Quantum Computer solves for).
 * These weights are dependent on distance. In order to keep the weights within
   a reasonable range, the distances are all scaled with respect to the
-  ``max_distance``, the largest distance between any two points in the dataset.
+  ``max_distance``, the largest distance between any two points in the data set.
 * Below is the function used to determine the weight to encourage close together
   points to be in the same cluster
 

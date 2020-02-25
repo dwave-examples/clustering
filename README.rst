@@ -14,9 +14,8 @@ neighborhoods. Another example could be having a boolean vector of TV shows
 that consumers watch; clusters in this data could help identify a particular
 consumer demographic.
 
-As well, if we do have a couple of labelled data points in our data set, we
-could potentially label the entire cluster based on the few labelled data points
-it contains.
+As well, if we do have a few labelled data points in our data set, we could
+potentially label the entire cluster based on these.
 
 .. image:: readme_imgs/clustered_plot.png
 
@@ -45,8 +44,8 @@ the solution in a plot, ``plot.png``.
 Code Overview
 -------------
 
-The D-Wave quantum computer solves a particular type of mathematical model
-called the Binary Quadratic Model. The goal here is to build a BQM such that
+The D-Wave quantum computer accepts problems formulated mathematically in Binary
+Quadratic Model (BQM) format. The goal here is to build a BQM such that
 it represents our clustering problem. Namely, we want a BQM such that a
 low-energy solution found by the D-Wave quantum computer would correspond to a
 solution to our clustering problem.
@@ -77,7 +76,7 @@ Each data point can only join one cluster
 * The rule that a data point may only join one cluster is represented by the
   variable ``choose_one_group`` (shown below). Each three-item-tuple below can
   be interpreted as ``(<join-red>, <join-green>, <join-blue>)``, where the
-  ``1``s and ``0``s indicate true and false, respectively. Hence, the
+  1s and 0s indicate true and false, respectively. Hence, the
   ``choose_one_group`` is a set of all valid states. (e.g. ``(1, 1, 0)`` is not
   valid because a data point is not allowed to be in both red and green clusters
   at once).

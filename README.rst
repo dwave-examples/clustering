@@ -2,14 +2,21 @@
 Clustering
 ==========
 
-TODO: talk about how in machine learning how we can get information out of
-unlabeled data by clustering. Example: house square footage and house price data -->
-clusters of data can indicate different neighbourhoods. A boolean vector of tv shows
-that consumer watches --> close together vectors may indicate the size of a particular
-demographic.
+A demo on identifying clusters in a dataset using the D-Wave quantum computer.
 
-TODO: if you have a couple labelled pieces of data in your cluster, perhaps you can label
-the whole cluster with a single labelled member. i.e. we can infer information by clustering data.
+When dealing with large datasets, we do not always have neatly labeled data
+(i.e. most, if not all, the data could be unlabeled). However, all is not lost
+as we can still extract insights from this data through clustering.
+
+For example, when dealing with housing data - namely, square footage and price -
+we can identify clusters in that data which may be indicative of different
+neighbourhoods. Another example could be having a boolean vector of tv shows
+that consumers watch; clusters in this data could help identify a particular
+consumer demographic.
+
+As well, if we do have a couple labelled data points in our data set, we could
+potentially label the entire cluster (containing said labelled data point) with
+that same label.
 
 .. image:: readme_imgs/clustered_plot.png
 

@@ -2,7 +2,14 @@
 Clustering
 ==========
 
-Clusters data points.
+TODO: talk about how in machine learning how we can get information out of
+unlabeled data by clustering. Example: house square footage and house price data -->
+clusters of data can indicate different neighbourhoods. A boolean vector of tv shows
+that consumer watches --> close together vectors may indicate the size of a particular
+demographic.
+
+TODO: if you have a couple labelled pieces of data in your cluster, perhaps you can label
+the whole cluster with a single labelled member. i.e. we can infer information by clustering data.
 
 .. image:: readme_imgs/clustered_plot.png
 
@@ -44,6 +51,11 @@ Each data point can only join one cluster
 
 * The code is only considering three different cluster labels: red, green, and
   blue.
+* Since a qubit can only end up in one of two states (i.e. it can only
+  answer yes or no questions)
+
+TODO: PUT INSPECTOR IMAGE WITH HERE
+
 * The rule that a data point may only join one cluster is represented by the
   variable ``choose_one_group`` (shown below). Each three-item-tuple below can
   be interpreted as ``(<join-red>, <join-green>, <join-blue>)``, where the

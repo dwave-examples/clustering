@@ -8,11 +8,11 @@ When dealing with large data sets, we do not always have neatly labeled data
 (i.e. most, if not all, the data could be unlabeled). However, all is not lost
 as we can still extract insights from this data through clustering.
 
-For example, when dealing with housing data---namely, square footage and price---
-we can identify clusters in that data which may be indicative of different
-neighborhoods. Another example could be having a boolean vector of TV shows
-that consumers watch; clusters in this data could help identify a particular
-consumer demographic.
+For example, when dealing with housing data---namely, square footage and
+price---we can identify clusters in that data which may be indicative of
+different neighborhoods. Another example could be having a boolean vector of TV
+shows that consumers watch; clusters in this data could help identify a
+particular consumer demographic.
 
 As well, if we do have a few labelled data points in our data set, we could
 potentially label the entire cluster based on these.
@@ -37,18 +37,18 @@ To run the same demo with a slightly more sophisticated data set:
 
   python example_clusters.py
 
-This provides a visualization of the problem on the D-Wave problem inspector and saves
-the solution in a plot, ``plot.png``.
+This provides a visualization of the problem on the D-Wave problem inspector and
+saves the solution in a plot, ``plot.png``.
 
 
 Code Overview
 -------------
 
 The D-Wave quantum computer accepts problems formulated mathematically in Binary
-Quadratic Model (BQM) format. The goal here is to build a BQM such that
-it represents our clustering problem. Namely, we want a BQM such that a
-low-energy solution found by the D-Wave quantum computer would correspond to a
-solution to our clustering problem.
+Quadratic Model (BQM) format. The goal here is to build a BQM such that it
+represents our clustering problem. Namely, we want a BQM such that a low-energy
+solution found by the D-Wave quantum computer would correspond to a solution
+to our clustering problem.
 
 Key properties of the clustering problem that we need to capture in our BQM:
 

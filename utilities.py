@@ -43,3 +43,13 @@ def visualize_groupings(groupings_dict, filename):
         plt.plot(*zip(*points), point_style)
 
     plt.savefig(filename)
+
+
+def visualize_scatterplot(x_y_tuples_list, filename):
+    """Plotting out a list of x-y tuples
+
+    Args:
+        x_y_tuples_list: A list of x-y coordinate values. e.g. [(1,4), (3, 2)]
+    """
+    plt.plot(*zip(*x_y_tuples_list), "o")
+    plt.savefig(filename)

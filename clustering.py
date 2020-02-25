@@ -16,9 +16,8 @@ import math
 import dwavebinarycsp
 import dwave.inspector
 from dwave.system import EmbeddingComposite, DWaveSampler
-import numpy as np
 
-from utilities import get_groupings, visualize_groupings
+from utilities import get_groupings, visualize_groupings, visualize_scatterplot
 
 
 class Coordinate:
@@ -31,10 +30,6 @@ class Coordinate:
         self.r = label + "r"
         self.g = label + "g"
         self.b = label + "b"
-
-
-def is_positive_sum(*args):
-    return sum(args) > 0
 
 
 def get_distance(coordinate_0, coordinate_1):
@@ -54,7 +49,7 @@ def get_max_distance(coordinates):
     return max_distance
 
 
-def cluster_points(scattered_points):
+def cluster_points(scattered_points, filename):
     # Set up problem
     coordinates = [Coordinate(x, y) for x, y in scattered_points]
     max_distance = get_max_distance(coordinates)
@@ -63,7 +58,7 @@ def cluster_points(scattered_points):
     csp = dwavebinarycsp.ConstraintSatisfactionProblem(dwavebinarycsp.BINARY)
 
     # Apply constraint: coordinate can only be in one colour group
-    choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}    # TODO: remove hardcode
+    choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
     for coord in coordinates:
         csp.add_constraint(choose_one_group, (coord.r, coord.g, coord.b))
 
@@ -109,7 +104,7 @@ def cluster_points(scattered_points):
 
     # Visualize solution
     groupings = get_groupings(best_sample)
-    visualize_groupings(groupings, "plot.png")
+    visualize_groupings(groupings, filename)
 
     # Print solution onto terminal
     # Note: This is simply a more compact version of 'best_sample'
@@ -117,22 +112,12 @@ def cluster_points(scattered_points):
 
 
 if __name__ == "__main__":
-    # scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
+    # Simple hardcoded data points
+    scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
 
-    covariance = [[3, 0], [0, 3]]
-    n_points = 3
-    x0, y0 = np.random.multivariate_normal([0, 0], covariance, n_points).T
-    x1, y1 = np.random.multivariate_normal([10, 5], covariance, n_points).T
-    x2, y2 = np.random.multivariate_normal([5, 15], covariance, n_points).T
-    xs = np.hstack([x0, x1, x2])
-    ys = np.hstack([y0, y1, y2])
-    xys = np.vstack([xs, ys]).T
-    scattered_points = list(map(tuple, xys))
+    # Save the original, un-clustered plot
+    visualize_scatterplot(scattered_points, "orig_plot.png")
 
-    import matplotlib
-    matplotlib.use("agg")
-    import matplotlib.pyplot as plt
-    plt.plot(*zip(*scattered_points), "o")
-    plt.savefig("orig_plot.png")
-
-    cluster_points(scattered_points)
+    # Find clusters
+    # Note: the key part of this demo is in the construction of this function
+    cluster_points(scattered_points, "clustered_plot.png")

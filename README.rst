@@ -84,12 +84,20 @@ Close together data points should be in the same cluster
 Far apart data points should be in different clusters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* Here, we want to encourage far apart data points to be in different clusters.
+  Again, since the D-Wave Quantum Computer solves for low-energy solutions, we
+  need to make far apart data points correspond to a low energy.
+* We do this by choosing a strong negative weight for far apart points. Hence,
+  the choice of the ``tanh`` function.
 
-References
-----------
+  ::
 
-A. Person, "Title of Amazing Information",
-`short link name <https://example.com/>`_
+      d = math.sqrt(get_distance(coord0, coord1) / max_distance)
+      weight = -math.tanh(d) * 0.1
+
+* Note that a scalar of ``0.1`` was applied in order to prevent this weight from
+  washing out the other weights in the BQM. The ``0.1`` is arbitrary and was
+  found by tinkering with the code.
 
 
 License

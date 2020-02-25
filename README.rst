@@ -78,8 +78,18 @@ Each data point can only join one cluster
       choose_one_group = {(0, 0, 1), (0, 1, 0), (1, 0, 0)}
 
 * You can easily see this "choose one group" constraint in the D-Wave inspector.
+  The image below has four data points (as seen in ``clustering.py``). Each of
+  the four data points has three nodes associated with it - ``<coordinate>.r``,
+  ``<coordinate.g>``, and ``<coordinate.b>`` - hence the twelve nodes below.
+* A particular data point's set of three nodes can actually be identified in the
+  graph below.  By noting the yellow triangles below, we can see that one vertex
+  is selected (in yellow) and two vertices are not selected (in white).
 
-.. image:: readme_imgs/clustered_plot.png
+.. image:: readme_imgs/logical_graph.png
+
+* In the actual D-Wave Inspector, you can actually hover over these nodes and
+  find out which data point and colour they represent and the BQM weights that
+  are placed on them.
 
 
 Close together data points should be in the same cluster

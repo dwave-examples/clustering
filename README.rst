@@ -10,7 +10,7 @@ as we can still extract insights from this data through clustering.
 
 For example, when dealing with housing data---namely, square footage and price---
 we can identify clusters in that data which may be indicative of different
-neighbourhoods. Another example could be having a boolean vector of TV shows
+neighborhoods. Another example could be having a boolean vector of TV shows
 that consumers watch; clusters in this data could help identify a particular
 consumer demographic.
 
@@ -20,6 +20,8 @@ it contains.
 
 .. image:: readme_imgs/clustered_plot.png
 
+Figure: A data set of nine points that have been divided into three clusters
+(shown with different colors).
 
 Usage
 -----
@@ -36,7 +38,7 @@ To run the same demo with a slightly more sophisticated data set:
 
   python example_clusters.py
 
-This provides a visualization of the problem on the D-Wave Problem Inspector and saves
+This provides a visualization of the problem on the D-Wave problem inspector and saves
 the solution in a plot, ``plot.png``.
 
 
@@ -99,13 +101,12 @@ Each data point can only join one cluster
   on them.
 
 
-Close together data points should be in the same cluster
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Close data points should be in the same cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* In order to encourage nearby points to be in the same cluster, we apply
-  weights to the BQM such that choosing nearby data points to be in the same
-  cluster would lead to a lower energy solution (something that the D-Wave
-  Quantum Computer solves for).
+* If we set BQM weights such that clustering close data points has lower-energy
+  solutions, when the quantum computer minimizes the BQM, it finds good
+  solutions to the clustering problem.
 * These weights are dependent on distance. In order to keep the weights within
   a reasonable range, the distances are all scaled with respect to the
   ``max_distance``, the largest distance between any two points in the data set.
@@ -119,17 +120,16 @@ Close together data points should be in the same cluster
 
 * We can apply many different types of functions for generating the weight.
   In this case, we chose a cosine function. The main idea is that we simply
-  need short distances (nearby points) to generate a strong negative value
-  towards putting the points in the same cluster (i.e. encourage the D-Wave
-  solver to pick this configuration), while points with large distances are
-  only mildy affected.
+  need short distances (nearby points) to generate a strong negative value that
+  contributes to clustering these points, while points with large distances are
+  only mildly affected.
 
-Far apart data points should be in different clusters
+Far-apart data points should be in different clusters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Here, we want to encourage far apart data points to be in different clusters.
-  Again, since the D-Wave Quantum Computer solves for low-energy solutions, we
-  need to make far apart data points correspond to a low energy.
+  Again, since the D-Wave quantum computer seeks low-energy configurations, we
+  need to make far apart data points correspond to lower energy.
 * We do this by choosing a strong negative weight for far apart points. Hence,
   the choice of the ``tanh`` function.
 
@@ -139,7 +139,7 @@ Far apart data points should be in different clusters
       weight = -math.tanh(d) * 0.1
 
 * Note that a scalar of ``0.1`` was applied in order to prevent this weight from
-  washing out the other weights in the BQM. The ``0.1`` is arbitrary and was
+  overwhelming the other weights in the BQM. The ``0.1`` is arbitrary and was
   found by tinkering with the code.
 
 

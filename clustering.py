@@ -116,8 +116,13 @@ if __name__ == "__main__":
     scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
 
     # Save the original, un-clustered plot
-    visualize_scatterplot(scattered_points, "orig_plot.png")
+    orig_filename = "four_points.png"
+    visualize_scatterplot(scattered_points, orig_filename)
 
     # Find clusters
     # Note: the key part of this demo is in the construction of this function
-    cluster_points(scattered_points, "clustered_plot.png")
+    clustered_filename = "four_points_clustered.png"
+    cluster_points(scattered_points, clustered_filename)
+
+    print("Your plots are saved to '{}' and '{}'.".format(orig_filename,
+                                                     clustered_filename))

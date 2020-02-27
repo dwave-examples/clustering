@@ -37,8 +37,8 @@ To run the same demo with a slightly more sophisticated data set:
 
   python example_clusters.py
 
-This provides a visualization of the problem on the D-Wave problem inspector and
-saves the solution in a plot, ``plot.png``.
+This provides a visualization of the problem on the D-Wave problem inspector,
+and plots of the original data set and its solution.
 
 
 Code Overview

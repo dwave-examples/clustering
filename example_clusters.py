@@ -24,7 +24,12 @@ xys = np.vstack([xs, ys]).T
 scattered_points = list(map(tuple, xys))
 
 # Save the original, un-clustered plot
-visualize_scatterplot(scattered_points, "orig_plot.png")
+orig_filename = "nine_points.png"
+visualize_scatterplot(scattered_points, orig_filename)
 
 # Run clustering script with scattered_points
-cluster_points(scattered_points, "clustered_plot.png")
+clustered_filename = "nine_points_clustered.png"
+cluster_points(scattered_points, clustered_filename)
+
+print("Your plots are saved to '{}' and '{}'.".format(orig_filename,
+                                                 clustered_filename))

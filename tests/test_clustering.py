@@ -11,6 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import os
+import subprocess
+import sys
 import unittest
 
 from clustering import Coordinate, get_distance, get_max_distance
@@ -30,3 +33,13 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(5, max_distance)
 
+
+class TestClusteringScript(unittest.TestCase):
+    def test_smoke(self):
+        """run pipelines.py and check that nothing crashes"""
+
+        # /path/to/clustering/tests/test_clustering.py
+        project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        demo_file = os.path.join(project_dir, 'clustering.py')
+
+        subprocess.check_output([sys.executable, demo_file])

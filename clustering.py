@@ -51,8 +51,10 @@ def get_max_distance(coordinates):
 
 def cluster_points(scattered_points, filename):
     # Set up problem
+    # Note: max_distance gets used in division later on. Hence, the max(.., 1)
+    #   is used to prevent a division by zero
     coordinates = [Coordinate(x, y) for x, y in scattered_points]
-    max_distance = get_max_distance(coordinates)
+    max_distance = max(get_max_distance(coordinates), 1)
 
     # Build constraints
     csp = dwavebinarycsp.ConstraintSatisfactionProblem(dwavebinarycsp.BINARY)

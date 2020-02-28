@@ -11,4 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import unittest
+
+from clustering import Coordinate, get_distance, get_max_distance
+
+
+class TestHelperFunctions(unittest.TestCase):
+    def test_get_distance(self):
+        coord0 = Coordinate(2.5, 3)
+        coord1 = Coordinate(10, -2)
+
+        distance = get_distance(coord0, coord1)
+        self.assertAlmostEqual(9.01387818866, distance)
+
+    def test_get_max_distance(self):
+        coords = [Coordinate(-1, 0), Coordinate(-.5, 3), Coordinate(-4, 4)]
+        max_distance = get_max_distance(coords)
+
+        self.assertEqual(5, max_distance)
 

@@ -13,9 +13,7 @@
 # limitations under the License.
 
 import subprocess
-from subprocess import Popen, PIPE,STDOUT
 import unittest
-import time
 import os
 
 class IntegrationTests(unittest.TestCase):
@@ -23,7 +21,8 @@ class IntegrationTests(unittest.TestCase):
     def test_clustering(self):
         output = subprocess.check_output(["python", "clustering.py"])
         output = str(output).upper()
-        print("Example output \n"+ output)
+        if os.getenv('DEBUG_OUTPUT'):
+            print("Example output \n"+ output)
 
         with self.subTest(msg="Verify if output contains 'Your plots are saved to"):
             self.assertIn("Your plots are saved to".upper(), output)

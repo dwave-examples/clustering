@@ -22,7 +22,7 @@ class IntegrationTests(unittest.TestCase):
         output = subprocess.check_output(["python", "clustering.py"])
         output = str(output).upper()
         if os.getenv('DEBUG_OUTPUT'):
-            print("Example output \n"+ output)
+            print("Example output \n" + output)
 
         with self.subTest(msg="Verify if output contains 'Your plots are saved to"):
             self.assertIn("Your plots are saved to".upper(), output)

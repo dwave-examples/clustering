@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import subprocess
-import unittest
 import os
+import sys
+import unittest
+import subprocess
+
 
 class IntegrationTests(unittest.TestCase):
 
     def test_clustering(self):
-        output = subprocess.check_output(["python", "clustering.py"])
+        output = subprocess.check_output([sys.executable, "clustering.py"])
         output = str(output).upper()
         if os.getenv('DEBUG_OUTPUT'):
-            print("Example output \n" + output)
+            print("Example output\n" + output)
 
         with self.subTest(msg="Verify if output contains 'Your plots are saved to"):
             self.assertIn("Your plots are saved to".upper(), output)

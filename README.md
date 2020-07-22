@@ -25,13 +25,13 @@ Figure: A data set of nine points that have been divided into three clusters
 To run the demo with a simple, hardcoded data set:
 
 ```bash
-  python clustering.py
+python clustering.py
 ```
 
 To run the same demo with a slightly more sophisticated data set:
 
 ```bash
-  python example_clusters.py
+python example_clusters.py
 ```
 
 This provides a visualization of the problem on the D-Wave problem inspector,

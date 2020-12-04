@@ -21,7 +21,7 @@ import subprocess
 class IntegrationTests(unittest.TestCase):
 
     def test_clustering(self):
-        output = subprocess.check_output([sys.executable, "clustering.py"])
+        output = subprocess.check_output([sys.executable, "clustering.py", "--no-problem-inspector"])
         output = str(output).upper()
         if os.getenv('DEBUG_OUTPUT'):
             print("Example output\n" + output)

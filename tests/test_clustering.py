@@ -42,4 +42,4 @@ class TestClusteringScript(unittest.TestCase):
         project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         demo_file = os.path.join(project_dir, 'clustering.py')
 
-        subprocess.check_output([sys.executable, demo_file])
+        subprocess.check_output([sys.executable, demo_file, '--no-problem-inspector'])

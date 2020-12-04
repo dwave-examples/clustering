@@ -18,10 +18,16 @@
 # This script is about setting up this more interesting data and then passing
 # the data to `clustering.cluster_points(..)`, a key function `clustering.py`.
 
+import argparse
 import numpy as np
 
 from utilities import visualize_scatterplot
 from clustering import cluster_points
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--no-problem-inspector', action='store_false', dest='problem_inspector', help='do not show problem inspector')
+args = parser.parse_args()
+
 
 # Set up three different clusters of data points
 covariance = [[3, 0], [0, 3]]
@@ -43,7 +49,7 @@ visualize_scatterplot(scattered_points, orig_filename)
 
 # Run clustering script with scattered_points
 clustered_filename = "nine_points_clustered.png"
-cluster_points(scattered_points, clustered_filename)
+cluster_points(scattered_points, clustered_filename, args.problem_inspector)
 
 print("Your plots are saved to '{}' and '{}'.".format(orig_filename,
                                                  clustered_filename))

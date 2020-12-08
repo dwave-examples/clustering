@@ -33,13 +33,16 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(5, max_distance)
 
+class IntegrationTests(unittest.TestCase):
 
-class TestClusteringScript(unittest.TestCase):
-    def test_smoke(self):
-        """run pipelines.py and check that nothing crashes"""
-
-        # /path/to/clustering/tests/test_clustering.py
+    def test_clustering(self):
         project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         demo_file = os.path.join(project_dir, 'clustering.py')
 
-        subprocess.check_output([sys.executable, demo_file])
+        output = subprocess.check_output([sys.executable, demo_file, "--no-problem-inspector"])
+        output = output.decode('utf-8').upper()
+
+        if os.getenv('DEBUG_OUTPUT'):
+            print("Example output\n" + output)
+
+        self.assertIn("Your plots are saved to".upper(), output)

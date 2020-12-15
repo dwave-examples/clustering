@@ -90,11 +90,11 @@ jobs:
             python -m virtualenv env
 
       # Restore cache
-      - run: *restore-cache-template
+      - restore_cache: *restore-cache-template
 
       - run: *install-dependences-template
 
-      - run: *save-cache-template
+      - save_cache: *save-cache-template
 
       - run: env/bin/coverage run -m unittest discover
 
@@ -158,7 +158,7 @@ jobs:
             .\python\tools\python.exe -m virtualenv env
 
       # Install requirements
-      - run: *restore-cache-template
+      - restore_cache: *restore-cache-template
 
       - run: &win-install-dependencies-template
           name: install dependencies
@@ -168,7 +168,7 @@ jobs:
             pip install -r requirements.txt
             pip install coverage
       
-      - run: *save-cache-template
+      - save_cache: *save-cache-template
 
       # Run tests
       - run: &win-run-unittests-template

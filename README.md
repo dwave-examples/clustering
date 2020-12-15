@@ -1,3 +1,7 @@
+[![Linux/Mac/Windows build status](
+  https://circleci.com/gh/dwave-examples/clustering.svg?style=svg)](
+  https://circleci.com/gh/dwave-examples/clustering)
+
 # Clustering
 
 A demo on identifying clusters in a data set using the D-Wave quantum computer.

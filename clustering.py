@@ -108,7 +108,10 @@ def cluster_points(scattered_points, filename, problem_inspector):
 
     # Submit problem to D-Wave sampler
     sampler = EmbeddingComposite(DWaveSampler())
-    sampleset = sampler.sample(bqm, chain_strength=4, num_reads=1000)
+    sampleset = sampler.sample(bqm,
+                               chain_strength=4,
+                               num_reads=1000,
+                               label='Example - Clustering')
     best_sample = sampleset.first.sample
 
     # Visualize graph problem
@@ -130,7 +133,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--no-problem-inspector', action='store_false', dest='problem_inspector', help='do not show problem inspector')
     args = parser.parse_args()
-    
+
     # Simple, hardcoded data set
     scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
 

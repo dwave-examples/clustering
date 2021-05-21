@@ -34,7 +34,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(5, max_distance)
 
 class IntegrationTests(unittest.TestCase):
-
+    @unittest.skipIf(os.getenv('SKIP_INT_TESTS'), "Skipping integration test.")
     def test_clustering(self):
         project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         demo_file = os.path.join(project_dir, 'clustering.py')

@@ -1,0 +1,37 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "Ocean Development Environment",
+
+	"image": "docker.io/dwavesys/ocean-dev:latest",
+
+	// temporarily disable, or otherwise stable cloud-client is reinstalled over dev release
+	//"postCreateCommand": "pip install -r requirements.txt",
+
+	// forward auth ports (relevant when run locally)
+	"forwardPorts": [36000, 36001, 36002, 36003, 36004, 36005, 36006, 36007],
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {},
+			"extensions": [
+				"ms-python.python",
+				"ms-toolsai.jupyter"
+			]
+		},
+
+		// Configure properties specific to Codespaces.
+		"codespaces": {
+			"openFiles": [
+				"README.md",
+				"README.rst"
+			]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

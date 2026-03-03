@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This repository has been archived as of **March 3rd, 2026** and is no longer maintained.
+
+
 [![Open in GitHub Codespaces](
   https://img.shields.io/badge/Open%20in%20GitHub%20Codespaces-333?logo=github)](
   https://codespaces.new/dwave-examples/clustering?quickstart=1)
